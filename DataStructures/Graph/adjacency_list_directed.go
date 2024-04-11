@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Edge struct {
 	src  int
@@ -45,5 +47,12 @@ func main() {
 			fmt.Printf("(%d -> %d)", edge.src, edge.dest)
 		}
 	}
-	
+
+	// find neighbours 1
+	fmt.Println()
+	for _, edge := range graph.graph[1] {
+		fmt.Printf(" %d ", edge.dest)
+	}
+	fmt.Println()
+
 }
