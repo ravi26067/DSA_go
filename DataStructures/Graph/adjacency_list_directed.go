@@ -30,6 +30,34 @@ func (g *Graph) AddEdge(src, dest int) {
 	g.graph[src] = append(g.graph[src], edge)
 }
 
+type WEdge struct {
+	src    int
+	dest   int
+	weight int
+}
+
+func NewWEdge(src, dest, weight int) WEdge {
+	return WEdge{src, dest, weight}
+}
+
+type WGrpah struct {
+	graph []([]WEdge)
+}
+
+func NewWGraph(vertices int) *WGrpah {
+	graph := make([]([]WEdge), vertices)
+
+	for i := range graph {
+		graph[i] = make([]WEdge, 0)
+	}
+	return &WGrpah{graph}
+}
+
+func (g *WGrpah) AddWEdge(src, dest, weight int) {
+	edge := NewWEdge(src, dest, weight)
+	g.graph[src] = append(g.graph[src], edge)
+}
+
 func main() {
 	vertices := 5
 	graph := NewGraph(vertices)
@@ -55,4 +83,21 @@ func main() {
 	}
 	fmt.Println()
 
+	//weighted adjacency list
+	vertices = 4
+	wgraph := NewWGraph(vertices)
+	wgraph.AddWEdge(0, 2, 2)
+	wgraph.AddWEdge(1, 2, 10)
+	wgraph.AddWEdge(1, 3, 0)
+	wgraph.AddWEdge(2, 0, 2)
+	wgraph.AddWEdge(2, 1, 10)
+	wgraph.AddWEdge(2, 3, -1)
+	wgraph.AddWEdge(3, 1, 0)
+	wgraph.AddWEdge(3, 2, -1)
+
+	fmt.Println()
+	for _, edge := range wgraph.graph[2] {
+		fmt.Printf(" %d ", edge.dest)
+	}
+	fmt.Println()
 }
