@@ -35,4 +35,5 @@ func main() {
 	fmt.Println("The sport football exist? (true or false)")
 	//Searching for a particular item
 	fmt.Println(itemExists(sports, "football"))
+	fmt.Println("Dummy test")
 }
