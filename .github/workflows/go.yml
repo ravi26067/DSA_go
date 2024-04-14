@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -22,3 +25,13 @@ jobs:
 
       - name: Check syntax
         run: go vet ./...
+
+  merge-check:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Check if all checks passed
+        run: exit $(git log -1 --pretty=format:%s | grep -c "Merge pull request")
+        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+
