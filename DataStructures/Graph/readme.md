@@ -1,4 +1,4 @@
-**# What is a Graph?**
+# What is a Graph?
 
 The lesson explains multiple types and terminologies used in graphs (from basic to complex).
 
