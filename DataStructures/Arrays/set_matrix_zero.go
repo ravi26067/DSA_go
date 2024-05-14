@@ -8,8 +8,8 @@ func setZeroes(matrix [][]int) {
 	n := len(matrix[0])
 
 	colmj := 1
-	for i := range m {
-		for j := range n {
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
 			if matrix[i][j] == 0 {
 				matrix[i][0] = 0
 				if j != 0 {
@@ -31,12 +31,12 @@ func setZeroes(matrix [][]int) {
 	}
 
 	if matrix[0][0] == 0 {
-		for j := range n {
+		for j := 0; j < n; j++ {
 			matrix[0][j] = 0
 		}
 	}
 	if colmj == 0 {
-		for i := range m {
+		for i := 0; i < m; i++ {
 			matrix[i][0] = 0
 		}
 	}
