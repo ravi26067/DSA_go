@@ -20,6 +20,7 @@ func setZeroes(matrix [][]int) {
 			}
 		}
 	}
+
 	for i := 1; i < m; i++ {
 		for j := 1; j < n; j++ {
 			if matrix[i][j] != 0 {
