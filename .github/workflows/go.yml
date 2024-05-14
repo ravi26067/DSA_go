@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
+  pull_request_target:
     branches:
       - master
 
@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up Go
         uses: actions/setup-go@v2
@@ -32,6 +33,10 @@ jobs:
 
     steps:
       - name: Check if all checks passed
-        run: exit $(git log -1 --pretty=format:%s | grep -c "Merge pull request")
-        if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
-
+        run: |
+          if [[ $(git log -1 --pretty=format:%s | grep -c "Merge pull request") -eq 0 ]]; then
+            echo "All checks passed"
+          else
+            echo "Checks failed"
+            exit 1
+          fi
