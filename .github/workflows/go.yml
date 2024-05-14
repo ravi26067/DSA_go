@@ -26,8 +26,6 @@ jobs:
       - name: Check syntax
         run: go vet ./...
 
-      # Add additional checks as needed
-
   merge-check:
     runs-on: ubuntu-latest
     needs: build
@@ -37,15 +35,3 @@ jobs:
         run: exit $(git log -1 --pretty=format:%s | grep -c "Merge pull request")
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
 
-      # Add additional checks here if needed
-
-  merge:
-    runs-on: ubuntu-latest
-    needs: merge-check
-    if: always()
-
-    steps:
-      - name: Merge PR
-        uses: pullreminders/merge-action@v5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
